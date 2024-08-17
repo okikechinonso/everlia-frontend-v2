@@ -77,7 +77,7 @@ const Login = ({ setShowResetPassword, setModalOpen }) => {
             <button
               disabled={loading}
               type="submit"
-              className="w-full text-center py-3 rounded bg-emerald-500 text-white hover:bg-emerald-600 transition-all focus:outline-none my-1"
+              className="w-full text-center py-3 rounded bg-[#1E1E1E] text-white transition-all focus:outline-none my-1"
             >
               Login
             </button>

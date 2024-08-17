@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
-import { useCart } from 'react-use-cart';
-import { FiHome, FiUser, FiShoppingCart, FiAlignLeft } from 'react-icons/fi';
+import React, { useContext, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+import { useCart } from "react-use-cart";
+import { FiHome, FiUser, FiShoppingCart, FiAlignLeft } from "react-icons/fi";
 
-import { UserContext } from '@context/UserContext';
-import LoginModal from '@component/modal/LoginModal';
-import { SidebarContext } from '@context/SidebarContext';
-import CategoryDrawer from '@component/drawer/CategoryDrawer';
+import { UserContext } from "@context/UserContext";
+import LoginModal from "@component/modal/LoginModal";
+import { SidebarContext } from "@context/SidebarContext";
+import CategoryDrawer from "@component/drawer/CategoryDrawer";
 
 const MobileFooter = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,24 +20,31 @@ const MobileFooter = () => {
 
   return (
     <>
-      <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      <div className="flex flex-col h-full justify-between align-middle bg-white rounded cursor-pointer overflow-y-scroll flex-grow scrollbar-hide w-full">
-        <CategoryDrawer className="w-6 h-6 drop-shadow-xl" />
-      </div>
-      <footer className="lg:hidden fixed z-30 bottom-0 bg-emerald-500 flex items-center justify-between w-full h-16 px-3 sm:px-10">
-        <button
-          aria-label="Bar"
-          onClick={toggleCategoryDrawer}
-          className="flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none"
-        >
-          <span className="text-xl text-white">
-            <FiAlignLeft className="w-6 h-6 drop-shadow-xl" />
-          </span>
-        </button>
+      <Mobile toggleCartDrawer={toggleCartDrawer} totalItems={totalItems} />
+    </>
+  );
+};
+
+function Mobile({ toggleCartDrawer, totalItems }) {
+  return (
+    <footer className="lg:hidden fixed z-30 top-16 opacity-15 flex items-center justify-between w-full h-16 px-3 sm:px-10">
+      <Link href="/">
+        <a className="mr-3 lg:mr-12 xl:mr-12 md:hidden lg:block">
+          <Image
+            width={110}
+            height={40}
+            src="/logo/everlia-logo.png"
+            alt="logo"
+          />
+        </a>
+      </Link>
+
+      <div className="flex items-center justify-between">
         <Link href="/">
           <a className="text-xl text-white" rel="noreferrer" aria-label="Home">
-            {' '}
-            <FiHome className="w-6 h-6 drop-shadow-xl" />
+            <button className="text-white px-2 py-2 text-[14px] mr-4 bg-slate-900 rounded">
+              Vendor/Resellers
+            </button>
           </a>
         </Link>
 
@@ -48,40 +55,11 @@ const MobileFooter = () => {
           <span className="absolute z-10 top-0 right-0 inline-flex items-center justify-center p-1 h-5 w-5 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 bg-red-500 rounded-full">
             {totalItems}
           </span>
-          <FiShoppingCart className="w-6 h-6 drop-shadow-xl" />
+          <FiShoppingCart color="#1E1E1E" className="w-6 h-6 drop-shadow-xl" />
         </button>
-        <button
-          aria-label="User"
-          type="button"
-          className="text-xl text-white indicator justify-center"
-        >
-          {userInfo?.image ? (
-            <Link href="/user/dashboard">
-              <a className="relative top-1 w-6 h-6">
-                <Image
-                  width={29}
-                  height={29}
-                  src={userInfo.image}
-                  alt="user"
-                  className="rounded-full"
-                />
-              </a>
-            </Link>
-          ) : userInfo?.name ? (
-            <Link href="/user/dashboard">
-              <a className="leading-none font-bold font-serif block">
-                {userInfo?.name[0]}
-              </a>
-            </Link>
-          ) : (
-            <span onClick={() => setModalOpen(!modalOpen)}>
-              <FiUser className="w-6 h-6 drop-shadow-xl" />
-            </span>
-          )}
-        </button>
-      </footer>
-    </>
+      </div>
+    </footer>
   );
-};
+}
 
 export default dynamic(() => Promise.resolve(MobileFooter), { ssr: false });

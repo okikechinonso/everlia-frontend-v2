@@ -40,47 +40,15 @@ const Home = ({ popularProducts, discountProducts, attributes }) => {
         <Layout>
           <div className="min-h-screen">
             <StickyCart />
-            <div className="bg-white">
-              <div className="mx-auto py-5 max-w-screen-2xl px-3 sm:px-10">
-                <div className="flex w-full">
-                  <div className="flex-shrink-0 xl:pr-6 lg:block w-full lg:w-3/5">
-                    <MainCarousel />
-                  </div>
-                  <div className="w-full hidden lg:flex">
-                    <OfferCard />
-                  </div>
-                </div>
-                <div className="bg-orange-100 px-10 py-6 rounded-lg mt-6 hidden lg:block">
-                  <Banner />
-                </div>
-              </div>
-            </div>
-
-            {/* feature category's */}
-            <div className="bg-gray-100 lg:py-16 py-10">
-              <div className="mx-auto max-w-screen-2xl px-3 sm:px-10">
-                <div className="mb-10 flex justify-center">
-                  <div className="text-center w-full lg:w-2/5">
-                    <h2 className="text-xl lg:text-2xl mb-2 font-serif font-semibold">
-                      {t("common:Featured-title")}
-                    </h2>
-                    <p className="text-base font-sans text-gray-600 leading-6">
-                      {t("common:Featured-sub-title")}
-                    </p>
-                  </div>
-                </div>
-                <FeatureCategory />
-              </div>
-            </div>
 
             {/* popular products */}
-            <div className="bg-gray-50 lg:py-16 py-10 mx-auto max-w-screen-2xl px-3 sm:px-10">
-              <div className="mb-10 flex justify-center">
+            <div className="bg-gray-50 bg-[url('/logo/everlia-bg.png')] mt-5 lg:py-16 py-10 mx-auto max-w-screen-2xl px-3 sm:px-10">
+              <div className="bg-[url('/logo/everlia_bg.png')] mb-10 flex justify-center">
                 <div className="text-center w-full lg:w-2/5">
                   <h2 className="text-xl lg:text-2xl mb-2 font-serif font-semibold">
                     {t("common:popular-products-title")}
                   </h2>
-                  <p className="text-base font-sans text-gray-600 leading-6">
+                  <p className="text-base font-sans text-gray-600 leading-6 mt">
                     {t("common:popular-products-sub-title")}
                   </p>
                 </div>
@@ -96,15 +64,6 @@ const Home = ({ popularProducts, discountProducts, attributes }) => {
                       />
                     ))}
                   </div>
-                </div>
-              </div>
-            </div>
-
-            {/* promotional banner card */}
-            <div className="block mx-auto max-w-screen-2xl">
-              <div className="mx-auto max-w-screen-2xl px-4 sm:px-10">
-                <div className="lg:p-16 p-6 bg-emerald-500 shadow-sm border rounded-lg">
-                  <CardTwo />
                 </div>
               </div>
             </div>

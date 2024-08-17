@@ -22,7 +22,7 @@ const ProductCard = ({ product, attributes }) => {
 
   const { data: globalSetting } = useAsync(SettingServices.getGlobalSetting);
 
-  const currency = globalSetting?.default_currency || "$";
+  const currency = globalSetting?.default_currency || "₦";
 
   // console.log('attributes in product cart',attributes)
 
@@ -103,7 +103,7 @@ const ProductCard = ({ product, attributes }) => {
             </h2>
           </div>
 
-          <div className="flex justify-between items-center text-heading text-sm sm:text-base space-s-2 md:text-base lg:text-xl">
+          <div className="text-heading text-sm sm:text-base space-s-2 md:text-base lg:text-xl">
             <Price
               card
               product={product}
@@ -127,7 +127,7 @@ const ProductCard = ({ product, attributes }) => {
                     item.id === product._id && (
                       <div
                         key={item.id}
-                        className="h-9 w-auto flex flex-wrap items-center justify-evenly py-1 px-2 bg-emerald-500 text-white rounded"
+                        className="h-9 w-auto flex flex-wrap items-center justify-evenly py-1 px-2 bg-[#1E1E1E] text-white rounded"
                       >
                         <button
                           onClick={() =>
@@ -149,7 +149,7 @@ const ProductCard = ({ product, attributes }) => {
                           }
                         >
                           <span className="text-dark text-base">
-                            <IoAdd />
+                            <IoAdd  />
                           </span>
                         </button>
                       </div>
@@ -160,11 +160,12 @@ const ProductCard = ({ product, attributes }) => {
               <button
                 onClick={() => handleAddItem(product)}
                 aria-label="cart"
-                className="h-9 w-9 flex items-center justify-center border border-gray-200 rounded text-emerald-500 hover:border-emerald-500 hover:bg-emerald-500 hover:text-white transition-all"
+                className="px-2 h-9 w-full bg-[#1E1E1E] flex items-center justify-between border border-gray-200 rounded text-emerald-500 hover:border-emerald-500 hover:bg-emerald-500 hover:text-white transition-all"
               >
                 {" "}
+                <span className="text-white">Add to Cart</span>
                 <span className="text-xl">
-                  <IoBagAddSharp />
+                  <IoBagAddSharp color="white" />
                 </span>{" "}
               </button>
             )}

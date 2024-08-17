@@ -26,6 +26,7 @@ module.exports = {
         "cta-1": "url('/cta/cta-bg-1.png')",
         "cta-2": "url('/cta/cta-bg-2.png')",
         "cta-3": "url('/cta/cta-bg-3.png')",
+        "t-color": "#1E1E1E",
       },
     },
   },
