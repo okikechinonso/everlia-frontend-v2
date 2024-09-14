@@ -17,16 +17,15 @@ const Layout = ({ title, description, children }) => {
         <Head>
           <title>
             {title
-              ? `KachaBazar | ${title}`
-              : "KachaBazar - React Grocery & Organic Food Store e-commerce Template"}
+              ? `Everlia | ${title}`
+              : "Everlia"}
           </title>
           {description && <meta name="description" content={description} />}
-          <link ref="icon" href="/favicon.png" />
+          <link ref="icon" href="/image.png" />
         </Head>
-        <NavBarTop />
         <Navbar />
-        <div className="bg-gray-50">{children}</div>
         <MobileFooter />
+        <div className="bg-gray-50">{children}</div>
         <div className="w-full">
           <FooterTop />
           <div className="hidden relative lg:block mx-auto max-w-screen-2xl py-6 px-3 sm:px-10">

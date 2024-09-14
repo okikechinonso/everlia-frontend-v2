@@ -9,7 +9,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="icon" href="/favicon.png" />
+          <link rel="icon" href="/image.png" />
           <meta
             property="og:title"
             content="KachaBazar - React Grocery & Organic Food Store e-commerce Template"

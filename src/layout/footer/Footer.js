@@ -215,7 +215,7 @@ const Footer = () => {
               <p className="text-base leading-7 font-medium block">{t("common:footer-call-us")}</p>
               <h5 className="text-2xl font-bold text-emerald-500 leading-7">+012345-67900</h5>
             </div>
-            <div className="col-span-1 hidden lg:block md:block">
+            {/* <div className="col-span-1 hidden lg:block md:block">
               <ul className="lg:text-right">
                 <li className="px-1 mb-2 md:mb-0 transition hover:opacity-80 inline-flex">
                   <Image
@@ -227,7 +227,7 @@ const Footer = () => {
                   />
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
