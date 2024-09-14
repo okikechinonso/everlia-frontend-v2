@@ -7,7 +7,6 @@ import Footer from "@layout/footer/Footer";
 import FooterTop from "@layout/footer/FooterTop";
 import MobileFooter from "@layout/footer/MobileFooter";
 import FeatureCard from "@component/feature-card/FeatureCard";
-import NavBarTop from "./navbar/NavBarTop";
 
 const Layout = ({ title, description, children }) => {
   return (
