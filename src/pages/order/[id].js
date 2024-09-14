@@ -1,4 +1,4 @@
-import { PDFDownloadLink } from "@react-pdf/renderer";
+// import { PDFDownloadLink } from "@react-pdf/renderer";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -7,7 +7,11 @@ import ReactToPrint from "react-to-print";
 
 //internal import
 import Invoice from "@component/invoice/Invoice";
-import InvoiceForDownload from "@component/invoice/InvoiceForDownload";
+
+//TODO: Replace package
+// import InvoiceForDownload from "@component/invoice/InvoiceForDownload";
+/////
+
 import Loading from "@component/preloader/Loading";
 import { UserContext } from "@context/UserContext";
 import Layout from "@layout/Layout";
@@ -41,9 +45,9 @@ const Order = ({ params }) => {
       }
     })();
 
-    if (!userInfo) {
-      router.push("/");
-    }
+    // if (!userInfo) {
+    //   router.push("/");
+    // }
   }, []);
 
   const { t } = useTranslation();
@@ -64,15 +68,15 @@ const Order = ({ params }) => {
             </label>
           </div>
           <div className="bg-white rounded-lg shadow-sm">
-            <Invoice
+            {/* <Invoice
               data={data}
               printRef={printRef}
               globalSetting={globalSetting}
               currency={globalSetting?.default_currency || "$"}
-            />
+            /> */}
             <div className="bg-white p-8 rounded-b-xl">
               <div className="flex lg:flex-row md:flex-row sm:flex-row flex-col justify-between invoice-btn">
-                <PDFDownloadLink
+                {/* <PDFDownloadLink
                   document={
                     <InvoiceForDownload
                       data={data}
@@ -94,9 +98,9 @@ const Order = ({ params }) => {
                       </button>
                     )
                   }
-                </PDFDownloadLink>
+                </PDFDownloadLink> */}
 
-                <ReactToPrint
+                {/* <ReactToPrint
                   trigger={() => (
                     <button className="mb-3 sm:mb-0 md:mb-0 lg:mb-0 flex items-center justify-center bg-emerald-500  text-white transition-all font-serif text-sm font-semibold h-10 py-2 px-5 rounded-md">
                       {t("common:printInvoice")}{" "}
@@ -107,7 +111,7 @@ const Order = ({ params }) => {
                   )}
                   content={() => printRef.current}
                   documentTitle="Invoice"
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -117,10 +121,13 @@ const Order = ({ params }) => {
   );
 };
 
+
 export const getServerSideProps = ({ params }) => {
   return {
     props: { params },
   };
 };
+
+// export default Order
 
 export default dynamic(() => Promise.resolve(Order), { ssr: false });

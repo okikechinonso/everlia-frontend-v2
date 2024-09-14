@@ -48,8 +48,8 @@ const VariantList = ({
                           value={selectVariant[att]}
                           defaultValue={selectVariant[att]}
                           hidden
-                        >
-                          {showingTranslateValue(el.name, lang)}
+                        > 
+                          {el.name.en}
                         </option>
                       )
                     // console.log('el', el._id === v[att] && el.name)
@@ -70,7 +70,7 @@ const VariantList = ({
                     vr?._id === att &&
                     el?._id === vl[att] && (
                       <option key={el._id} value={vl[att]} defaultValue>
-                        {showingTranslateValue(el.name, lang)}
+                        {el.name.en}
                       </option>
                     )
                 )
@@ -100,7 +100,7 @@ const VariantList = ({
                             : "bg-gray-100 mr-2 border-0 text-gray-600 rounded-full inline-flex items-center justify-center px-3 py-1 text-xs font-serif mt-2 focus:outline-none"
                         }`}
                       >
-                        {showingTranslateValue(el.name, lang)}
+                        {el.name.en}
                       </button>
                     )
                 )

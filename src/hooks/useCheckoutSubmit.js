@@ -13,6 +13,7 @@ import OrderServices from "@services/OrderServices";
 import CouponServices from "@services/CouponServices";
 import { notifyError, notifySuccess } from "@utils/toast";
 import SettingServices from "@services/SettingServices";
+import { fileToBase64 } from "@utils/convert";
 
 const useCheckoutSubmit = () => {
   const {
@@ -92,20 +93,17 @@ const useCheckoutSubmit = () => {
 
   //if not login then push user to home page
   useEffect(() => {
-
     //TODO: Remove login check
     // if (!userInfo) {
     //   router.push("/");
     // }
 
-    setValue("firstName", shippingAddress.firstName);
-    setValue("lastName", shippingAddress.lastName);
+    setValue("name", shippingAddress.name);
     setValue("address", shippingAddress.address);
     setValue("contact", shippingAddress.contact);
     setValue("email", shippingAddress.email);
     setValue("city", shippingAddress.city);
     setValue("country", shippingAddress.country);
-    setValue("zipCode", shippingAddress.zipCode);
   }, []);
 
   const submitHandler = async (data) => {
@@ -114,8 +112,10 @@ const useCheckoutSubmit = () => {
     setIsCheckoutSubmit(true);
     setError("");
 
+    const files = await fileToBase64(data.file)
+
     userInfo = {
-      name: `${data.firstName} ${data.lastName}`,
+      name: `${data.name}`,
       contact: data.contact,
       email: data.email,
       address: data.address,
@@ -126,9 +126,9 @@ const useCheckoutSubmit = () => {
 
     let orderInfo = {
       user_info: userInfo,
-      shippingOption: data.shippingOption,
       paymentMethod: data.paymentMethod,
       status: "Pending",
+      paymentReceipt: files[0],
       cart: items,
       subTotal: cartTotal,
       shippingCost: shippingCost,
@@ -136,96 +136,21 @@ const useCheckoutSubmit = () => {
       total: total,
     };
 
-    if (data.paymentMethod === "Card") {
-      if (!stripe || !elements) {
-        return;
-      }
+    console.log(orderInfo)
 
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: "card",
-        card: elements.getElement(CardElement),
-      });
-
-      // console.log('error', error);
-
-      if (error && !paymentMethod) {
-        setError(error.message);
+    OrderServices.addOrder(orderInfo)
+      .then((res) => {
+        router.push(`/order/${res._id}`);
+        notifySuccess("Your Order Confirmed!");
+        Cookies.remove("couponInfo");
+        sessionStorage.removeItem("products");
+        emptyCart();
         setIsCheckoutSubmit(false);
-      } else {
-        setError("");
-        const orderData = {
-          ...orderInfo,
-          cardInfo: paymentMethod,
-        };
-
-        handlePaymentWithStripe(orderData);
-
-        // console.log('cardInfo', orderData);
-        return;
-      }
-    }
-    if (data.paymentMethod === "Cash") {
-      OrderServices.addOrder(orderInfo)
-        .then((res) => {
-          router.push(`/order/${res._id}`);
-          notifySuccess("Your Order Confirmed!");
-          Cookies.remove("couponInfo");
-          sessionStorage.removeItem("products");
-          emptyCart();
-          setIsCheckoutSubmit(false);
-        })
-        .catch((err) => {
-          notifyError(err.message);
-          setIsCheckoutSubmit(false);
-        });
-    }
-  };
-
-  const handlePaymentWithStripe = async (order) => {
-    try {
-      // console.log('try goes here!', order);
-      // const updatedOrder = {
-      //   ...order,
-      //   currency: 'usd',
-      // };
-      OrderServices.createPaymentIntent(order)
-        .then((res) => {
-          stripe.confirmCardPayment(res.client_secret, {
-            payment_method: {
-              card: elements.getElement(CardElement),
-            },
-          });
-
-          const orderData = {
-            ...order,
-            cardInfo: res,
-          };
-          OrderServices.addOrder(orderData)
-            .then((res) => {
-              router.push(`/order/${res._id}`);
-              notifySuccess("Your Order Confirmed!");
-              Cookies.remove("couponInfo");
-              emptyCart();
-              sessionStorage.removeItem("products");
-              setIsCheckoutSubmit(false);
-            })
-            .catch((err) => {
-              notifyError(err ? err?.response?.data?.message : err.message);
-              setIsCheckoutSubmit(false);
-            });
-          // console.log('res', res, 'paymentIntent', paymentIntent);
-        })
-
-        .catch((err) => {
-          console.log("err on creating payment intent", err.message);
-          notifyError(err ? err?.response?.data?.message : err.message);
-          setIsCheckoutSubmit(false);
-        });
-    } catch (err) {
-      console.log("err", err?.message);
-      notifyError(err ? err?.response?.data?.message : err.message);
-      setIsCheckoutSubmit(false);
-    }
+      })
+      .catch((err) => {
+        notifyError(err.message);
+        setIsCheckoutSubmit(false);
+      });
   };
 
   const handleShippingCost = (value) => {
