@@ -1,5 +1,5 @@
-import React from 'react';
-import Label from '@component/form/Label';
+import React from "react";
+import Label from "@component/form/Label";
 
 const InputArea = ({
   register,
@@ -9,7 +9,40 @@ const InputArea = ({
   type,
   placeholder,
   Icon,
+  list = []
 }) => {
+  return type == "select"
+    ? SelectField({
+        register,
+        defaultValue,
+        name,
+        label,
+        type,
+        placeholder,
+        Icon,
+        list
+      })
+    : InputField({
+        register,
+        defaultValue,
+        name,
+        label,
+        type,
+        placeholder,
+        Icon,
+      });
+};
+
+function SelectField({
+  register,
+  defaultValue,
+  name,
+  label,
+  type,
+  placeholder,
+  Icon,
+  list = [],
+}) {
   return (
     <>
       <Label label={label} />
@@ -17,7 +50,53 @@ const InputArea = ({
         {Icon && (
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <span className="text-gray-800 focus-within:text-gray-900 sm:text-base">
-              <Icon />{' '}
+              <Icon />{" "}
+            </span>
+          </div>
+        )}
+
+        <select
+          {...register(`${name}`, {
+            required: `${label} is required!`,
+          })}
+          defaultValue={defaultValue}
+          type={type}
+          placeholder={placeholder}
+          name={name}
+          className={
+            Icon
+              ? "py-2 pl-10 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12"
+              : "py-2 px-4 md:px-5 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12"
+          }
+        >
+          {list.length > 0 ? (
+            list.map((e) => <option value={e}>{e.toUpperCase()}</option>)
+          ) : (
+            <option value="">Select...</option>
+          )}
+        </select>
+      </div>
+    </>
+  );
+}
+
+function InputField({
+  register,
+  defaultValue,
+  name,
+  label,
+  type,
+  placeholder,
+  Icon,
+}) {
+  return (
+    <>
+      <Label label={label} />
+      <div className="relative">
+        {Icon && (
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span className="text-gray-800 focus-within:text-gray-900 sm:text-base">
+              <Icon />{" "}
             </span>
           </div>
         )}
@@ -31,13 +110,13 @@ const InputArea = ({
           name={name}
           className={
             Icon
-              ? 'py-2 pl-10 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12'
-              : 'py-2 px-4 md:px-5 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12'
+              ? "py-2 pl-10 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12"
+              : "py-2 px-4 md:px-5 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12"
           }
         />
       </div>
     </>
   );
-};
+}
 
 export default InputArea;

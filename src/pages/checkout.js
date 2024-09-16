@@ -30,6 +30,58 @@ import { copyToClipboard } from "@utils/utils";
 
 const Checkout = () => {
   const [modalOpen, setModalOpen] = useState(true);
+  const [country, setCountry] = useState(countries[0]);
+  const [state, setState] = useState(country["state"][0]);
+  const [area, setArea] = useState(state["area"]);
+
+  const countries = [
+    {
+      country: "Nigeria",
+      state: [
+        {
+          name: "Lagos",
+          area: ["AJAH", "Lekki", "Alimoshi", "Cameroun"],
+        },
+        {
+          name: "Port Harcourt",
+          area: ["Mile one", "Rumuola"],
+        },
+        {
+          name: "Abuja",
+          area: ["Kwali"],
+        },
+      ],
+    },
+  ];
+
+  const handleChangeCountry = (e) => {
+    
+
+    setCountry(e.target.value);
+    setState(
+      countries.find((e) => {
+        if (e.country === country) {
+          return e.state
+        }
+        return [];
+      })
+    );
+  };
+
+  const handleChangeState = (event) => {
+    setCountry(event.target.value);
+    setState(
+      countries.find((e) => {
+        const value =  event.target.value
+        if (e.country === country) {
+          return e.state
+        }
+        return [];
+      })
+    );
+  };
+
+
 
   const {
     state: { userInfo },
@@ -151,8 +203,21 @@ const Checkout = () => {
                           register={register}
                           label="Country"
                           name="country"
-                          type="text"
+                          type="select"
                           placeholder="United States"
+                          list={["Nigeria", "Ghana", "Benin", "Cameroun"]}
+                        />
+                        <Error errorName={errors.country} />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                        <InputArea
+                          register={register}
+                          label="Location"
+                          name="location"
+                          type="select"
+                          placeholder="United States"
+                          list={["AJAH", "Lekki", "Alimoshi", "Cameroun"]}
                         />
                         <Error errorName={errors.country} />
                       </div>
@@ -318,11 +383,11 @@ const AccountDetail = () => {
             </span>
             <span
               onClick={() => {
-                copyToClipboard({text, setCopySuccess});
+                copyToClipboard({ text, setCopySuccess });
               }}
               className="ml-auto flex-shrink-0 text-gray-800"
             >
-             {copySuccess != "" ? "copied" : <MdOutlineContentCopy /> } 
+              {copySuccess != "" ? "copied" : <MdOutlineContentCopy />}
             </span>
           </div>
           <div className="flex items-center py-2 text-sm w-full  text-gray-500 last:border-b-0 last:text-base last:pb-0">

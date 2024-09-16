@@ -44,14 +44,14 @@ const Home = ({ popularProducts, discountProducts, attributes }) => {
             {/* popular products */}
             <div className="bg-gray-50 bg-[url('/logo/everlia-bg.png')] mt-5 lg:py-16 py-10 mx-auto max-w-screen-2xl px-3 sm:px-10">
               <div className="bg-[url('/logo/everlia_bg.png')] mb-10 flex justify-center">
-                <div className="text-center w-full lg:w-2/5">
+                {/* <div className="text-center w-full lg:w-2/5">
                   <h2 className="text-xl lg:text-2xl mb-2 font-serif font-semibold">
                     {t("common:popular-products-title")}
                   </h2>
-                  <p className="text-base font-sans text-gray-600 leading-6 mt">
+                  <p className="text-base font-sans text-white-50 leading-6 mt">
                     {t("common:popular-products-sub-title")}
                   </p>
-                </div>
+                </div> */}
               </div>
               <div className="flex">
                 <div className="w-full">
