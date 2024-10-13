@@ -28,60 +28,74 @@ import useTranslation from "next-translate/useTranslation";
 import { UserContext } from "@context/UserContext";
 import { copyToClipboard } from "@utils/utils";
 
+const countries = [
+  {
+    country: "Nigeria",
+    state: [
+      {
+        name: "Lagos",
+        area: ["Ajah", "Lekki", "Alimoshi"],
+      },
+      {
+        name: "Port Harcourt",
+        area: ["Mile one", "Rumuola"],
+      },
+      {
+        name: "Abuja",
+        area: ["Kwali"],
+      },
+    ],
+  },
+  {
+    country: "Benin",
+    state: [
+      {
+        name: "Cotonou",
+        area: ["Fidjrosse", "Akpakpa"],
+      },
+      {
+        name: "Porto Novo",
+        area: ["Adjina", "Tokpota"],
+      },
+    ],
+  },
+];
+
 const Checkout = () => {
   const [modalOpen, setModalOpen] = useState(true);
-  const [country, setCountry] = useState(countries[0]);
-  const [state, setState] = useState(country["state"][0]);
-  const [area, setArea] = useState(state["area"]);
-
-  const countries = [
-    {
-      country: "Nigeria",
-      state: [
-        {
-          name: "Lagos",
-          area: ["AJAH", "Lekki", "Alimoshi", "Cameroun"],
-        },
-        {
-          name: "Port Harcourt",
-          area: ["Mile one", "Rumuola"],
-        },
-        {
-          name: "Abuja",
-          area: ["Kwali"],
-        },
-      ],
-    },
-  ];
+  // const [country, setCountry] = useState(countries[0]);
+  const [state, setState] = useState([]);
+  const [area, setArea] = useState([]);
 
   const handleChangeCountry = (e) => {
-    
-
-    setCountry(e.target.value);
-    setState(
-      countries.find((e) => {
-        if (e.country === country) {
-          return e.state
-        }
-        return [];
-      })
-    );
+    const country = e.target.value;
+    try {
+      const foundCountry = countries.find((item) => item.country === country);
+      if (foundCountry) {
+        setState(foundCountry.state);
+        setArea(foundCountry.state[0].area);
+      } else {
+        throw new Error("Country not found");
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
-  const handleChangeState = (event) => {
-    setCountry(event.target.value);
-    setState(
-      countries.find((e) => {
-        const value =  event.target.value
-        if (e.country === country) {
-          return e.state
-        }
-        return [];
-      })
-    );
+  const handleStateChange = (e) => {
+    const selectedState = e.target.value;
+    try {
+      const foundState = state.find((item) => item.name === selectedState);
+      console.log(foundState);
+      if (foundState) {
+        setArea(foundState.area);
+      } else {
+        throw new Error("State not found");
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
   };
-
-
 
   const {
     state: { userInfo },
@@ -205,7 +219,8 @@ const Checkout = () => {
                           name="country"
                           type="select"
                           placeholder="United States"
-                          list={["Nigeria", "Ghana", "Benin", "Cameroun"]}
+                          list={countries.map((e) => e.country)}
+                          onChange={handleChangeCountry}
                         />
                         <Error errorName={errors.country} />
                       </div>
@@ -217,11 +232,25 @@ const Checkout = () => {
                           name="location"
                           type="select"
                           placeholder="United States"
-                          list={["AJAH", "Lekki", "Alimoshi", "Cameroun"]}
+                          list={state.map((e) => e.name)}
+                          onChange={handleStateChange}
                         />
                         <Error errorName={errors.country} />
                       </div>
+
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                        <InputArea
+                          register={register}
+                          label="Area"
+                          name="area"
+                          type="select"
+                          placeholder="Area"
+                          list={area}
+                          // onChange={handleStateChange}
+                        />
+                        <Error errorName={errors.country} />
+                      </div>
+                      <div className="hidden col-span-6 sm:col-span-3 lg:col-span-2">
                         <AccountDetail />
                       </div>
 

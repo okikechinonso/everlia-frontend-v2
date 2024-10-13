@@ -9,39 +9,44 @@ const InputArea = ({
   type,
   placeholder,
   Icon,
-  list = []
+  list = [],
+  ...rest // This will include onChange and other additional props
 }) => {
-  return type == "select"
-    ? SelectField({
-        register,
-        defaultValue,
-        name,
-        label,
-        type,
-        placeholder,
-        Icon,
-        list
-      })
-    : InputField({
-        register,
-        defaultValue,
-        name,
-        label,
-        type,
-        placeholder,
-        Icon,
-      });
+  return type === "select" ? (
+    <SelectField
+      register={register}
+      defaultValue={defaultValue}
+      name={name}
+      label={label}
+      placeholder={placeholder}
+      Icon={Icon}
+      list={list}
+      {...rest} // Ensure onChange is passed to SelectField
+    />
+  ) : (
+    <InputField
+      register={register}
+      defaultValue={defaultValue}
+      name={name}
+      label={label}
+      type={type}
+      placeholder={placeholder}
+      Icon={Icon}
+      {...rest} // Ensure onChange is passed to InputField
+    />
+  );
 };
+
 
 function SelectField({
   register,
   defaultValue,
   name,
   label,
-  type,
   placeholder,
   Icon,
   list = [],
+  ...rest
 }) {
   return (
     <>
@@ -56,11 +61,10 @@ function SelectField({
         )}
 
         <select
-          {...register(`${name}`, {
+          {...register(name, {
             required: `${label} is required!`,
           })}
           defaultValue={defaultValue}
-          type={type}
           placeholder={placeholder}
           name={name}
           className={
@@ -68,9 +72,14 @@ function SelectField({
               ? "py-2 pl-10 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12"
               : "py-2 px-4 md:px-5 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12"
           }
+          {...rest}
         >
           {list.length > 0 ? (
-            list.map((e) => <option value={e}>{e.toUpperCase()}</option>)
+            list.map((e, index) => (
+              <option key={index} value={e}>
+                {e.toUpperCase()}
+              </option>
+            ))
           ) : (
             <option value="">Select...</option>
           )}
@@ -88,6 +97,7 @@ function InputField({
   type,
   placeholder,
   Icon,
+  ...rest
 }) {
   return (
     <>
@@ -113,6 +123,7 @@ function InputField({
               ? "py-2 pl-10 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12"
               : "py-2 px-4 md:px-5 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12"
           }
+          {...rest}
         />
       </div>
     </>

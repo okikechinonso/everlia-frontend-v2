@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCart } from "react-use-cart";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useElements, useStripe } from "@stripe/react-stripe-js";
 
 //internal import
 import useAsync from "@hooks/useAsync";
@@ -122,7 +122,10 @@ const useCheckoutSubmit = () => {
       country: data.country,
       city: data.city,
       zipCode: data.zipCode,
+      location: data.location,
+      area: data.area
     };
+
 
     let orderInfo = {
       user_info: userInfo,
