@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
-import { CardElement } from "@stripe/react-stripe-js";
 import Link from "next/link";
 import { useState, useContext } from "react";
 import LoginModal from "@component/modal/LoginModal";
@@ -116,7 +115,6 @@ const Checkout = () => {
     showCard,
     setShowCard,
     error,
-    stripe,
     couponInfo,
     couponRef,
     handleCouponCode,
@@ -250,7 +248,7 @@ const Checkout = () => {
                         />
                         <Error errorName={errors.country} />
                       </div>
-                      <div className="hidden col-span-6 sm:col-span-3 lg:col-span-2">
+                      <div className="lg:hidden col-span-6 sm:col-span-3 lg:col-span-2">
                         <AccountDetail />
                       </div>
 
@@ -281,7 +279,7 @@ const Checkout = () => {
                     <div className="col-span-6 sm:col-span-3">
                       <button
                         type="submit"
-                        disabled={isEmpty || !stripe || isCheckoutSubmit}
+                        disabled={isEmpty || isCheckoutSubmit}
                         className="bg-emerald-500 hover:bg-emerald-600 border border-emerald-500 transition-all rounded py-3 text-center text-sm font-serif font-medium text-white flex justify-center w-full"
                       >
                         {isCheckoutSubmit ? (
@@ -366,6 +364,7 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
+              <AccountDetail />
             </div>
           </div>
         </div>
@@ -388,7 +387,7 @@ const AccountDetail = () => {
 
   return (
     <>
-      <div className="md:w-full lg:w-2/5 lg:ml-10 xl:ml-14 md:ml-6 flex flex-col h-full md:sticky lg:sticky top-28 md:order-2 lg:order-2">
+      <div className="md:w-full ">
         <div className="border p-5 lg:px-8 lg:py-8 rounded-lg bg-white order-1 sm:order-2">
           <h2 className="font-semibold font-serif text-lg pb-4">
             Account Details
