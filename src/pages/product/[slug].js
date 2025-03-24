@@ -71,11 +71,15 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
   
 
   useEffect(() => {
+    // Check if a product has a test feature
     if (product?.hasTest) {
       const testerVariant = product.variants?.find((v) => v.name === "test");
       if (testerVariant) {
-        setHasTest(true);
-        setTesterInfo(testerVariant);
+        setHasTest(true) //Tracks the test feature
+        setTesterInfo(testerVariant); //Stores the variants info
+      }else{
+        setHasTest(false)
+        setTesterInfo(null)
       }
     }
   }, [product]);
@@ -384,10 +388,12 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                             </span>
                           ))}
                         </div>
+                        
                         {hasTest && testerInfo && (
-                         <div className="mb-4 border">
-                           <h3 className="text-sm font-medium capitalize">{testerInfo.name}</h3>
-                         </div>
+                          <div className="mt-1 mb-4">
+                            <h3 className="text-sm font-bold text-gray-700 capitalize">    {testerInfo.name}:
+                           </h3>
+                          </div>
                        )}
 
                         <div>

@@ -48,14 +48,19 @@ const ProductModal = ({
       const testerVariant = product.variants?.find((v) => v.name === "test");
       if (testerVariant) {
         setHasTest(true); //Tracks the test feature
-        setTesterInfo(testerVariant); //
+        setTesterInfo(testerVariant); //Stores the variant info
+      }else{
+        setHasTest(false)
+        setTesterInfo(null)
       }
+      //console.log((product.hasTest))
+      //console.log(testerVariant)
     }
   }, [product]);
 
 
   useEffect(() => {
-     // console.log('value', value, product);
+     //console.log('value', value, product);
     
     if (value) {
       const result = product?.variants?.filter((variant) =>
@@ -92,7 +97,7 @@ const ProductModal = ({
         Object.keys(newObj).every((k) => newObj[k] === v[k])
       );
 
-       // console.log("result2", result2);
+        //console.log("result2", result2);
 
       if (result.length <= 0 || result2 === undefined) return setStock(0);
 
@@ -303,13 +308,15 @@ const ProductModal = ({
                   </span>
                 ))}
               </div>
+
               {hasTest && testerInfo && (
                 <div className="mt-1 mb-4">
-                  <h3 className="text-md font-medium capitalize">
-                    {testerInfo.name}
+                  <h3 className="text-sm font-bold text-gray-700 capitalize">
+                    {testerInfo.name}:
                   </h3>
                 </div>
               )}
+              
               <div className="flex items-center mt-4">
                 <div className="flex items-center justify-between space-s-3 sm:space-s-4 w-full">
                   <div className="group flex items-center justify-between rounded-md overflow-hidden flex-shrink-0 border h-11 md:h-12 border-gray-300">
