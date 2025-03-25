@@ -60,7 +60,6 @@ const ProductModal = ({
 
 
   useEffect(() => {
-     //console.log('value', value, product);
     
     if (value) {
       const result = product?.variants?.filter((variant) =>
@@ -96,8 +95,6 @@ const ProductModal = ({
       const result2 = result?.find((v) =>
         Object.keys(newObj).every((k) => newObj[k] === v[k])
       );
-
-        //console.log("result2", result2);
 
       if (result.length <= 0 || result2 === undefined) return setStock(0);
 
