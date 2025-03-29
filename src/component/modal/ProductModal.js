@@ -39,9 +39,28 @@ const ProductModal = ({
   const [selectVa, setSelectVa] = useState({});
   const [variantTitle, setVariantTitle] = useState([]);
   const [variants, setVariants] = useState([]);
+  const [hasTest, setHasTest] = useState(false);
+  const [testerInfo, setTesterInfo] = useState(null)
+ 
+  useEffect(() => {
+    // Checks if a product has a test feature
+    if (product?.hasTest) {
+      const testerVariant = product.variants?.find((v) => v.name === "test");
+      if (testerVariant) {
+        setHasTest(true); //Tracks the test feature
+        setTesterInfo(testerVariant); //Stores the variant info
+      }else{
+        setHasTest(false)
+        setTesterInfo(null)
+      }
+      //console.log((product.hasTest))
+      //console.log(testerVariant)
+    }
+  }, [product]);
+
 
   useEffect(() => {
-    // console.log('value', value, product);
+    
     if (value) {
       const result = product?.variants?.filter((variant) =>
         Object.keys(selectVa).every((k) => selectVa[k] === variant[k])
@@ -76,8 +95,6 @@ const ProductModal = ({
       const result2 = result?.find((v) =>
         Object.keys(newObj).every((k) => newObj[k] === v[k])
       );
-
-      // console.log("result2", result2);
 
       if (result.length <= 0 || result2 === undefined) return setStock(0);
 
@@ -289,6 +306,14 @@ const ProductModal = ({
                 ))}
               </div>
 
+              {hasTest && testerInfo && (
+                <div className="mt-1 mb-4">
+                  <h3 className="text-sm font-bold text-gray-700 capitalize">
+                    {testerInfo.name}:
+                  </h3>
+                </div>
+              )}
+              
               <div className="flex items-center mt-4">
                 <div className="flex items-center justify-between space-s-3 sm:space-s-4 w-full">
                   <div className="group flex items-center justify-between rounded-md overflow-hidden flex-shrink-0 border h-11 md:h-12 border-gray-300">

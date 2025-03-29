@@ -66,8 +66,28 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
   const [selectVa, setSelectVa] = useState({});
   const [variantTitle, setVariantTitle] = useState([]);
   const [variants, setVariants] = useState([]);
+  const [hasTest, setHasTest] = useState(false);
+  const [testerInfo, setTesterInfo] = useState(null)
+  
 
   useEffect(() => {
+    // Check if a product has a test feature
+    if (product?.hasTest) {
+      const testerVariant = product.variants?.find((v) => v.name === "test");
+      if (testerVariant) {
+        setHasTest(true) //Tracks the test feature
+        setTesterInfo(testerVariant); //Stores the variants info
+      }else{
+        setHasTest(false)
+        setTesterInfo(null)
+      }
+    }
+  }, [product]);
+
+
+
+  useEffect(() => {
+
     if (value) {
       const result = product?.variants?.filter((variant) =>
         Object.keys(selectVa).every((k) => selectVa[k] === variant[k])
@@ -103,7 +123,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
       );
 
       // console.log("result2", result2);
-      if (result.length <= 0 || result2 === undefined) return setStock(0);
+      if (result.length <= 0 || result2 === undefined) return setStock(0)
 
       setVariants(result);
       setSelectVariant(result2);
@@ -122,14 +142,13 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
       const result = product?.variants?.filter((variant) =>
         Object.keys(selectVa).every((k) => selectVa[k] === variant[k])
       );
-
       setVariants(result);
       setStock(product.variants[0]?.quantity);
       setSelectVariant(product.variants[0]);
       setSelectVa(product.variants[0]);
       setImg(product.variants[0]?.image);
       const price = getNumber(product.variants[0]?.price);
-      const originalPrice = getNumber(product.variants[0]?.originalPrice);
+      const originalPrice = getNumber(product.variants[0]?.originalPrice); 
       const discountPercentage = getNumber(
         ((originalPrice - price) / originalPrice) * 100
       );
@@ -346,14 +365,14 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                           currency={currency}
                           originalPrice={originalPrice}
                         />
-
+                        
                         <div className="mb-4">
                           {variantTitle?.map((a, i) => (
                             <span key={i + 1}>
                               <h4 className="text-sm py-1">
                                 {showingTranslateValue(a?.name, lang)}:
                               </h4>
-                              <div className="flex flex-row mb-3">
+                              <div className="flex flex-row mb-">
                                 <VariantList
                                   att={a._id}
                                   lang={lang}
@@ -369,6 +388,13 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                             </span>
                           ))}
                         </div>
+                        
+                        {hasTest && testerInfo && (
+                          <div className="mt-1 mb-4">
+                            <h3 className="text-sm font-bold text-gray-700 capitalize">    {testerInfo.name}:
+                           </h3>
+                          </div>
+                       )}
 
                         <div>
                           <div className="text-sm leading-6 text-gray-500 md:leading-7">
