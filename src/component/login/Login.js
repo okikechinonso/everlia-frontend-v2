@@ -13,9 +13,9 @@ const Login = ({ setShowResetPassword, setModalOpen }) => {
     <>
       <div className="text-center mb-6">
         <h2 className="text-3xl font-bold font-serif">Login</h2>
-        <p className="text-sm md:text-base text-gray-500 mt-2 mb-8 sm:mb-10">
+        {/* <p className="text-sm md:text-base text-gray-500 mt-2 mb-8 sm:mb-10">
           Login with your email and password
-        </p>
+        </p> */}
       </div>
       <form
         onSubmit={handleSubmit(submitHandler)}
