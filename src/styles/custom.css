@@ -31,10 +31,6 @@ p:not(:last-of-type) {
   align-items: center;
 }
 
-#admin-nav li:first-child {
-  margin: 0 20px;
-}
-
 .coupon .info::after,
 .coupon .info::before {
   content: "";
