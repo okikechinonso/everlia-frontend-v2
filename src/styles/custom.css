@@ -21,6 +21,20 @@ p:not(:last-of-type) {
   margin-bottom: 1rem;
 }
 
+#admin-nav li:hover {
+  background: #E8F0F0;
+}
+
+#admin-nav li {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+#admin-nav li:first-child {
+  margin: 0 20px;
+}
+
 .coupon .info::after,
 .coupon .info::before {
   content: "";

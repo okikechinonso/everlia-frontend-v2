@@ -1,20 +1,75 @@
 import Link from "next/link";
+import { AiOutlineLogout } from "react-icons/ai";
+import { MdDashboard } from "react-icons/md";
+import { BsCircleSquare } from "react-icons/bs";
+import { FaTag } from "react-icons/fa";
+import { SiGoogleanalytics } from "react-icons/si";
+import { IoSettingsOutline } from "react-icons/io5";
+import { FaUsers } from "react-icons/fa";
 
 const AdminNavbar = () => {
   return (
-    <aside className="w-64 bg-gray-900 text-white p-5 space-y-6">
-      <h2 className="text-2xl font-bold text-center">Admin Panel</h2>
-      <nav>
+    <aside className="h-[100vh] w-64 bg-[#ffffff] text-grey  space-y-6">
+      <h2 className="text-[25px] font-bold text-center">Everlia</h2>
+      <nav id="admin-nav"  style={{ background: "red" }}>
         <ul className="space-y-3">
-          <li><Link href="/" className="block p-3 rounded hover:bg-gray-700">Dashboard</Link></li>
-          <li><Link href="/admin/products" className="block p-3 rounded hover:bg-gray-700">Products</Link></li>
-          <li><Link href="/orders" className="block p-3 rounded hover:bg-gray-700">Orders</Link></li>
-          <li><Link href="/users" className="block p-3 rounded hover:bg-gray-700">Users</Link></li>
-          <li><Link href="/admin/reports" className="block p-3 rounded hover:bg-gray-700">Reports</Link></li>
-          <li><Link href="/settings" className="block p-3 rounded hover:bg-gray-700">Settings</Link></li>
-          <li><a href="#" className="block p-3 rounded bg-red-600 hover:bg-red-700">Logout</a></li>
+          <li>
+            <MdDashboard />
+            <Link href="/" className="block  rounded hover:bg-gray-700">
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <BsCircleSquare />
+            <Link
+              href="/admin/products"
+              className="block  rounded hover:bg-gray-700"
+            >
+              Products
+            </Link>
+          </li>
+          <li>
+            <FaTag />
+            <Link
+              href="/orders"
+              className="block  rounded hover:bg-gray-700"
+            >
+              Orders
+            </Link>
+          </li>
+          <li>
+            <FaUsers />
+            <Link href="/users" className="block  rounded hover:bg-gray-700">
+              Users
+            </Link>
+          </li>
+          <li>
+          <SiGoogleanalytics />
+
+            <Link
+              href="/admin/reports"
+              className="block  rounded hover:bg-gray-700"
+            >
+              Reports
+            </Link>
+          </li>
+          <li>
+            <IoSettingsOutline />
+            <Link
+              href="/settings"
+              className="block  rounded hover:bg-gray-700"
+            >
+              Settings
+            </Link>
+          </li>
         </ul>
       </nav>
+      <button className="flex items-center px-6 w-full hover:bg-red-700">
+        <AiOutlineLogout />
+        <a href="#" className="block  rounded">
+          Logout
+        </a>
+      </button>
     </aside>
   );
 };

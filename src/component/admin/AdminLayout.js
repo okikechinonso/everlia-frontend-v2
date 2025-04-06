@@ -4,7 +4,7 @@ import AdminHeader from "@component/admin/AdminHeader";
 
 const AdminLayout = ({ children }) => {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-[#F0F0F0]">
       {/* Sidebar Navigation */}
       <AdminNavbar />
       {/* Main Content Area */}

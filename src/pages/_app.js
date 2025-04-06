@@ -1,6 +1,5 @@
 import "@styles/custom.css";
 import { CartProvider } from "react-use-cart";
-import { Elements } from "@stripe/react-stripe-js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 //internal import
@@ -16,12 +15,10 @@ function MyApp({ Component, pageProps }) {
       <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
         <UserProvider>
           <SidebarProvider>
-            <Elements stripe={stripePromise}>
               <CartProvider>
                 <DefaultSeo />
                 <Component {...pageProps} />
               </CartProvider>
-            </Elements>
           </SidebarProvider>
         </UserProvider>
       </GoogleOAuthProvider>
