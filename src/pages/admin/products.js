@@ -120,7 +120,6 @@ const Products = () => {
                     <button className="bg-red-600 text-white px-3 py-1 rounded-md flex items-center hover:bg-red-700"
                       onClick={() => handleDeleteProduct(product.productId)}>
                       <AiOutlineDelete className="w-5 h-5 mr-1" />
-                      Delete
                     </button>
                   </td>
                 </tr>
@@ -130,7 +129,7 @@ const Products = () => {
         </div>
 
         {/* Right: Add Product Form */}
-        <div className="w-1/3 bg-white p-6 rounded-lg shadow-lg border border-gray-300">
+        {/* <div className="w-1/3 bg-white p-6 rounded-lg shadow-lg border border-gray-300">
           <h2 className="text-2xl font-semibold mb-4">{selectedProduct ? "✏️ Edit Product" : "➕ Add Product"}</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label className="block font-medium">Title</label>
@@ -158,7 +157,7 @@ const Products = () => {
               {selectedProduct ? "Edit Product" : "Add Product"}
             </button>
           </form>
-        </div>
+        </div> */}
       </div>
     </AdminLayout>
   );
