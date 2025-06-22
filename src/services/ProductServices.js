@@ -5,7 +5,7 @@ const ProductServices = {
     return requests.get("/products/show");
   },
   getShowingStoreProducts: async ({ category = "", title = "" }) => {
-    return requests.get(`/products/store?category=${category}&title=${title}`);
+    return requests.get(`/products/list/store?category=${category}&title=${title}`);
   },
   getDiscountedProducts: async () => {
     return requests.get("/products/discount");
