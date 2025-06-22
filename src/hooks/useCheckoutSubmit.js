@@ -93,10 +93,6 @@ const useCheckoutSubmit = () => {
 
   //if not login then push user to home page
   useEffect(() => {
-    //TODO: Remove login check
-    // if (!userInfo) {
-    //   router.push("/");
-    // }
 
     setValue("name", shippingAddress.name);
     setValue("address", shippingAddress.address);

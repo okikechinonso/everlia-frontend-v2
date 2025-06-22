@@ -67,27 +67,23 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
   const [variantTitle, setVariantTitle] = useState([]);
   const [variants, setVariants] = useState([]);
   const [hasTest, setHasTest] = useState(false);
-  const [testerInfo, setTesterInfo] = useState(null)
-  
+  const [testerInfo, setTesterInfo] = useState(null);
 
   useEffect(() => {
     // Check if a product has a test feature
     if (product?.hasTest) {
       const testerVariant = product.variants?.find((v) => v.name === "test");
       if (testerVariant) {
-        setHasTest(true) //Tracks the test feature
+        setHasTest(true); //Tracks the test feature
         setTesterInfo(testerVariant); //Stores the variants info
-      }else{
-        setHasTest(false)
-        setTesterInfo(null)
+      } else {
+        setHasTest(false);
+        setTesterInfo(null);
       }
     }
   }, [product]);
 
-
-
   useEffect(() => {
-
     if (value) {
       const result = product?.variants?.filter((variant) =>
         Object.keys(selectVa).every((k) => selectVa[k] === variant[k])
@@ -123,7 +119,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
       );
 
       // console.log("result2", result2);
-      if (result.length <= 0 || result2 === undefined) return setStock(0)
+      if (result.length <= 0 || result2 === undefined) return setStock(0);
 
       setVariants(result);
       setSelectVariant(result2);
@@ -148,7 +144,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
       setSelectVa(product.variants[0]);
       setImg(product.variants[0]?.image);
       const price = getNumber(product.variants[0]?.price);
-      const originalPrice = getNumber(product.variants[0]?.originalPrice); 
+      const originalPrice = getNumber(product.variants[0]?.originalPrice);
       const discountPercentage = getNumber(
         ((originalPrice - price) / originalPrice) * 100
       );
@@ -365,7 +361,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                           currency={currency}
                           originalPrice={originalPrice}
                         />
-                        
+
                         <div className="mb-4">
                           {variantTitle?.map((a, i) => (
                             <span key={i + 1}>
@@ -388,13 +384,15 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                             </span>
                           ))}
                         </div>
-                        
+
                         {hasTest && testerInfo && (
                           <div className="mt-1 mb-4">
-                            <h3 className="text-sm font-bold text-gray-700 capitalize">    {testerInfo.name}:
-                           </h3>
+                            <h3 className="text-sm font-bold text-gray-700 capitalize">
+                              {" "}
+                              {testerInfo.name}:
+                            </h3>
                           </div>
-                       )}
+                        )}
 
                         <div>
                           <div className="text-sm leading-6 text-gray-500 md:leading-7">
@@ -494,7 +492,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                               {t("common:shareYourSocialText")}
                             </p>
                             <ul className="flex mt-4">
-                              <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-emerald-500  mr-2 transition ease-in-out duration-500">
+                              <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-white-500  mr-2 transition ease-in-out duration-500">
                                 <FacebookShareButton
                                   url={`https://supermarket-plum.vercel.app/product/${router.query.slug}`}
                                   quote=""
@@ -502,7 +500,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                                   <FacebookIcon size={32} round />
                                 </FacebookShareButton>
                               </li>
-                              <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-emerald-500  mr-2 transition ease-in-out duration-500">
+                              <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-white-500  mr-2 transition ease-in-out duration-500">
                                 <TwitterShareButton
                                   url={`https://supermarket-plum.vercel.app/product/${router.query.slug}`}
                                   quote=""
@@ -510,7 +508,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                                   <TwitterIcon size={32} round />
                                 </TwitterShareButton>
                               </li>
-                              <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-emerald-500  mr-2 transition ease-in-out duration-500">
+                              <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-white-500  mr-2 transition ease-in-out duration-500">
                                 <RedditShareButton
                                   url={`https://supermarket-plum.vercel.app/product/${router.query.slug}`}
                                   quote=""
@@ -518,7 +516,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                                   <RedditIcon size={32} round />
                                 </RedditShareButton>
                               </li>
-                              <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-emerald-500  mr-2 transition ease-in-out duration-500">
+                              <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-white-500  mr-2 transition ease-in-out duration-500">
                                 <WhatsappShareButton
                                   url={`https://supermarket-plum.vercel.app/product/${router.query.slug}`}
                                   quote=""
@@ -526,7 +524,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                                   <WhatsappIcon size={32} round />
                                 </WhatsappShareButton>
                               </li>
-                              <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-emerald-500  mr-2 transition ease-in-out duration-500">
+                              <li className="flex items-center text-center border border-gray-100 rounded-full hover:bg-white-500  mr-2 transition ease-in-out duration-500">
                                 <LinkedinShareButton
                                   url={`https://supermarket-plum.vercel.app/product/${router.query.slug}`}
                                   quote=""

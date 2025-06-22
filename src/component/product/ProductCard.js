@@ -149,7 +149,7 @@ const ProductCard = ({ product, attributes }) => {
                           }
                         >
                           <span className="text-dark text-base">
-                            <IoAdd  />
+                            <IoAdd />
                           </span>
                         </button>
                       </div>
@@ -160,10 +160,10 @@ const ProductCard = ({ product, attributes }) => {
               <button
                 onClick={() => handleAddItem(product)}
                 aria-label="cart"
-                className="px-2 h-9 w-full bg-[#1E1E1E] flex items-center justify-between border border-gray-200 rounded text-emerald-500 hover:border-emerald-500 hover:bg-emerald-500 hover:text-white transition-all"
+                className="px-2 h-9 w-full bg-[#1E1E1E] flex items-center justify-between border border-gray-200 rounded text-emerald-500  hover:text-white transition-all"
               >
                 {" "}
-                <span className="text-white">Add to Cart</span>
+                <span className="text-white text-sm">Add to Cart</span>
                 <span className="text-xl">
                   <IoBagAddSharp color="white" />
                 </span>{" "}
