@@ -130,7 +130,7 @@ const Navbar = () => {
         </div>
 
         {/* second header */}
-        <NavbarPromo />
+        {/* <NavbarPromo /> */}
       </div>
     </>
   );
