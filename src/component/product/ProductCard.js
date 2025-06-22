@@ -67,9 +67,9 @@ const ProductCard = ({ product, attributes }) => {
           onClick={() => handleModalOpen(!modalOpen, product._id)}
           className="relative flex justify-center w-full cursor-pointer pt-2"
         >
-          <div className="left-3">
+          {/* <div className="left-3">
             <Stock product={product} stock={product.stock} card />
-          </div>
+          </div> */}
 
           <Discount product={product} />
 

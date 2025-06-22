@@ -57,7 +57,7 @@ const Navbar = () => {
           <div className="top-bar h-16 lg:h-auto flex items-center justify-between py-4 mx-auto">
             <Link href="/">
               <a className="mr-3 lg:mr-12 xl:mr-12 hidden md:hidden lg:block">
-                <Image width={110} height={40} src="/logo/everlia-logo.png" alt="logo" />
+                <Image width={110} height={20} src="/logo/everlia spelt.png" alt="logo" />
               </a>
             </Link>
             <div className="w-full transition-all duration-200 ease-in-out lg:flex lg:max-w-[520px] xl:max-w-[750px] 2xl:max-w-[900px] md:mx-12 lg:mx-4 xl:mx-0">
