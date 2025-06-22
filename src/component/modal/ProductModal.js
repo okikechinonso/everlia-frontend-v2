@@ -311,6 +311,17 @@ const ProductModal = ({
                   <h3 className="text-sm font-bold text-gray-700 capitalize">
                     {testerInfo.name}:
                   </h3>
+                  <div className="flex gap-x-2">
+                    <button className="bg-gray-100 mr-2 border-0 text-gray-600 rounded-full px-3 py-1 text-xs font-serif mt-2 focus:outline-none">
+                      10ml
+                    </button>
+                    <button className="bg-gray-100 mr-2 border-0 text-gray-600 rounded-full px-3 py-1 text-xs font-serif mt-2 focus:outline-none">
+                      20ml
+                    </button>
+                    <button className="bg-gray-100 mr-2 border-0 text-gray-600 rounded-full px-3 py-1 text-xs font-serif mt-2 focus:outline-none">
+                      30ml
+                    </button>
+                  </div>
                 </div>
               )}
               
